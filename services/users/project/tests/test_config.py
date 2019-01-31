@@ -8,6 +8,7 @@ from project import create_app
 
 app = create_app()
 
+
 class TestDevelopmentConfig(TestCase):
     def create_app(self):
         app.config.from_object('project.config.DevelopmentConfig')
@@ -27,7 +28,7 @@ class TestTestingConfig(TestCase):
         app.config.from_object('project.config.TestingConfig')
         return app
 
-    def TestTestingConfig(TestCase):
+    def test_app_is_testing(self):
         self.assertTrue(app.config['SECRET_KEY'] == 'my_precious')
         self.assertTrue(app.config['TESTING'])
         self.assertFalse(app.config('PRESERVE_CONTEXT_ON_EXCEPTION'))

@@ -13,6 +13,7 @@ def add_user(username, email):
     db.session.commit()
     return user
 
+
 class TestUserService(BaseTestCase):
     """Tests for the Users Service."""
 
@@ -131,17 +132,21 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(len(data['data']['users']), 2)
             self.assertIn('michael', data['data']['users'][0]['username'])
-            self.assertIn('michael@mherman.org',
-                    data['data']['users'][0]['email'])
+            self.assertIn(
+                'michael@mherman.org',
+                data['data']['users'][0]['email']
+            )
             self.assertIn('fletcher', data['data']['users'][1]['username'])
-            self.assertIn('fletcher@notreal.com',
-                    data['data']['users'][1]['email'])
+            self.assertIn(
+                'fletcher@notreal.com',
+                data['data']['users'][1]['email']
+            )
             self.assertIn('success', data['status'])
 
     def test_main_no_users(self):
         """
-        Ensure the main route behaves correctly when no users have been added to
-        the database
+        Ensure the main route behaves correctly when no users have been added
+        to the database
         """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
@@ -150,8 +155,8 @@ class TestUserService(BaseTestCase):
 
     def test_main_users(self):
         """
-        Ensure the main route behaves correctly when no users have been added to
-        the database
+        Ensure the main route behaves correctly when no users have been added
+        to the database
         """
         add_user('michael', 'michael@mherman.org')
         add_user('fletcher', 'fletcher@notreal.com')
