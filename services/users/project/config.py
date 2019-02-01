@@ -10,6 +10,7 @@ class BaseConfig:
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     BCRYPT_LOG_ROUNDS = 13
 
+
 class DevelopmentConfig(BaseConfig):
     """Development configuration"""
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')

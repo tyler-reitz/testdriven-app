@@ -1,6 +1,3 @@
-import datetime
-
-
 from sqlalchemy.sql import func
 from flask import current_app
 
