@@ -281,7 +281,7 @@ class TestUserService(BaseTestCase):
 
     def test_add_user_inactive(self):
         add_user('test', 'test@test.com', 'test')
-        #update user
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.active = False
         db.session.commit()

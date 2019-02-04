@@ -81,7 +81,6 @@ def login_user():
 @authenticate
 def logout_user(resp):
     # get auth token
-    auth_header = request.headers.get('Authorization')
     response_object = {
         'status': 'success',
         'message': 'Successfully logged out.'
