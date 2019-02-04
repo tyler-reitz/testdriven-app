@@ -16,6 +16,7 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
       - SECRET_KEY=my_precious
+      - EDITOR=vim
     depends_on:
       - users-db
 
