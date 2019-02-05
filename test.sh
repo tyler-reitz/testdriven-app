@@ -8,6 +8,7 @@ inspect() {
   fi
 }
 
+
 # run unit and integration tests
 docker-compose -f docker-compose-dev.yml up -d --build
 docker-compose -f docker-compose-dev.yml exec users python manage.py test
@@ -17,6 +18,13 @@ inspect $? users-lint
 docker-compose -f docker-compose-dev.yml exec client npm test -- --coverage
 inspect $? client
 docker-compose -f docker-compose-dev.yml down
+
+docker-compose -f docker-compose-prod.yml up -d --build
+docker-compose -f docker-compose-prod.yml exec users manage.py recreate_db
+npx cypress run --config baseUrl=http://localhost
+inspect $? e2e
+docker-compose-prod.yml down
+
 
 # return proper code
 if [ -n "${fails}" ]; then
