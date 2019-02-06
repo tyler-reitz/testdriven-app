@@ -25,7 +25,7 @@ describe('Status', () => {
       .get('input[type="submit"]').click()
       .get('.navbar-burger').click();
 
-    cy.wait(500);
+    cy.wait(750);
 
     // assert '/status' is displayed properly
     cy.visit('/status')
