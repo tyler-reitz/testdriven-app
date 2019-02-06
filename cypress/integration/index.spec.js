@@ -8,5 +8,6 @@ describe('Index', () => {
       .get('a').contains('Log Out').should('not.be.visible')
       .get('a').contains('Register')
       .get('a').contains('Log In')
+      .get('.notification.is-success').should('not.be.visible')
   })
 })

@@ -104,11 +104,18 @@ class Form extends Component {
     };
     const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType.toLowerCase()}`;
     axios.post(url, data)
-    .then((res) => {
-      this.clearForm();
-      this.props.loginUser(res.data.auth_token);
-    })
-    .catch((err) => { console.log(err); });
+      .then((res) => {
+        this.clearForm();
+        this.props.loginUser(res.data.auth_token);
+      })
+      .catch((err) => {
+        if (formType === 'Login') {
+          this.props.createMessage('User does not exist.', 'danger')
+        }
+        if (formType === 'Register') {
+          this.props.createMessage('That user already exists.', 'danger')
+        }
+      });
   };
   render() {
     if (this.props.isAuthenticated) {
