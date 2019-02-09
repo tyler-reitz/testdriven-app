@@ -24,31 +24,32 @@ then
       fi
     }
 
-  deploy_cluster() {
+    deploy_cluster() {
 
-    # users
-    template="ecs_users_stage_taskdefinition.json"
-    task_template=$(cat "ecs/$template")
-    task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
-    echo "$task_def"
-    register_definition
+      # users
+      template="ecs_users_stage_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
 
-    # client
-    template="ecs_client_stage_taskdefinition.json"
-    task_template=$(cat "ecs/$template")
-    task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
-    echo "$task_def"
-    register_definition
+      # client
+      template="ecs_client_stage_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
 
-    # swagger
-    template="ecs_swagger_stage_taskdefinition.json"
-    task_template=$(cat "ecs/$template")
-    task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
-    echo "$task_def"
-    register_definition
-  }
+      # swagger
+      template="ecs_swagger_stage_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
+    }
 
-  configure_aws_cli
-  deploy_cluster
+    configure_aws_cli
+    deploy_cluster
+  fi
 
 fi
