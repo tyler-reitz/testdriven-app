@@ -53,19 +53,19 @@ all() {
 # run appropriate tests
 if [[ "${type}" == "server" ]]; then
   echo "\n"
-  echo "Running server-side tests!\n"
+  echo "Running server-side tests!!!\n"
   server
 elif  [[ "${type}" == "client" ]]; then
   echo "\n"
-  echo "running client-side tests!\n"
+  echo "running client-side tests!!!\n"
   client
 elif  [[ "${type}" == "e2e" ]]; then
   echo "\n"
-  echo "running e2e tests!\n"
+  echo "running e2e tests!!!\n"
   e2e
 else
   echo "\n"
-  echo "Running all tests!\n"
+  echo "Running all tests!!!\n"
   all
 fi
 
@@ -74,6 +74,6 @@ if [ -n "${fails}" ]; then
   echo "Test failed: ${fails}"
   exit 1
 else
-  echo "Tests passed!"
+  echo "Tests passed!!!"
   exit 0
 fi
