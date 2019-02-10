@@ -8,6 +8,8 @@ then
     export REACT_APP_USERS_SERVICE_URL="http://testdriven-staging-alb-131037764.us-west-1.elb.amazonaws.com"
   elif [ "$TRAVIS_BRANCH" == "production" ]; then
     export DOCKER_ENV=prod
+    export REACT_APP_USERS_SERVICE_URL="testdriven-production-albj-313337492.us-west-1.elb.amazonaws.com"
+    export
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || \
