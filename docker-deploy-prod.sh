@@ -39,7 +39,7 @@ then
       #service="testdriven-users-stage-service"
       template="ecs_users_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
-      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_definition
       #update_service

@@ -15,7 +15,7 @@
       "environment": [
         {
           "name": "APP_SETTINGS",
-          "value": "project.config.StagingConfig"
+          "value": "project.config.ProductionConfig"
         },
         {
           "name": "DATABASE_TEST_URL",
@@ -23,11 +23,11 @@
         },
         {
           "name": "DATABASE_URL",
-          "value": "postgres://postgres:postgres@users-db:5432/users_stage"
+          "value": "%s"
         },
         {
           "name": "SECRET_KEY",
-          "value": "my_precious"
+          "value": "%s"
         }
       ],
       "links": [
@@ -40,7 +40,7 @@
           "awslogs-region": "us-west-1"
         }
       }
-    },
+    }
   ],
   "family": "testdriven-users-prod-td"
 }
