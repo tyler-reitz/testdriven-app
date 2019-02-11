@@ -33,34 +33,34 @@ then
 
     deploy_cluster() {
 
-      cluster="testdriven-staging-cluster"
+      cluster="testdriven-production-cluster"
 
       # users
-      #service="testdriven-users-stage-service"
+      service="testdriven-users-prod-service"
       template="ecs_users_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_definition
-      #update_service
+      update_service
 
       # client
-      #service="testdriven-client-stage-service"
+      service="testdriven-client-prod-service"
       template="ecs_client_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      #update_service
+      update_service
 
       # swagger
-      #service="testdriven-swagger-stage-service"
+      service="testdriven-swagger-prod-service"
       template="ecs_swagger_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      #update_service
+      update_service
     }
 
     configure_aws_cli
