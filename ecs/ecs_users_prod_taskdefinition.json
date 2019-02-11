@@ -30,9 +30,6 @@
           "value": "%s"
         }
       ],
-      "links": [
-        "users-db"
-      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
