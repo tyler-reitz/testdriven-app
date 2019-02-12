@@ -68,3 +68,18 @@ services:
       - URL=https://petstore.swagger.io/v2/swagger.json
     depends_on:
       - users
+
+  exercises:
+    build:
+      context: ./services/exercises
+      dockerfile: Dockerfile-dev
+    volumes:
+      - './services/exercises:/usr/src/app'
+    environment:
+      - FLASK_APP=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - USERS_SERVICE=http://users:5000
+      - SECRET_KEY=my_precious
+    depends_on:
+      - users
+
