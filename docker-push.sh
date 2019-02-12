@@ -5,6 +5,7 @@ then
 
   if [ "$TRAVIS_BRANCH" == "staging" ]; then
     export DOCKER_ENV=stage
+    export REACT_APP_USERS_SERVICE_URL="http://testdriven-staging-alb-131037764.us-west-1.elb.amazonaws.com"
   elif [ "$TRAVIS_BRANCH" == "production" ]; then
     export DOCKER_ENV=prod
   fi
@@ -35,6 +36,7 @@ then
     docker push $REPO/$USERS_DB:$TAG
     # client
     docker build $CLIENT_REPO -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV
+    --build-arg REACT_APP_USERS_SERVICE_URL=REACT_APP_USERS_SERVICE_URL
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$TAG
     docker push $REPO/$CLIENT:$TAG
     # swagger
