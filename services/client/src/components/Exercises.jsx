@@ -16,14 +16,12 @@ class Exercises extends Component {
         showGrading: false,
         showCorrect: false,
         showIncorrect: false,
-      },
-      url: process.env.REACT_APP_API_GATEWAY_URL,
+      }
     }
   }
 
   componentDidMount() {
     this.getExercises()
-    console.log(process.env.REACT_APP_API_GATEWAY_URL)
   }
 
   getExercises() {
