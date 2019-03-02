@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import AceEditor from 'react-ace'
-import brace from 'brace'
-import 'brace/mode/python'
-import 'brace/theme/solarized_dark'
+
+import Exercise from './Exercise'
 
 class Exercises extends Component {
   constructor(props) {
@@ -36,10 +34,11 @@ class Exercises extends Component {
     this.setState(newState)
   }
 
-  submitExercise = (evt) => {
+  submitExercise = (evt, id) => {
     evt.preventDefault()
 
     const newState = this.state.editor
+    const exercise = this.state.exercises.filter(el => el.id === id)[0]
     newState.showGrading = true
     newState.showCorrect = false
     newState.showIncorrect = false
@@ -47,7 +46,11 @@ class Exercises extends Component {
 
     this.setState(newState)
 
-    const data = { answer: this.state.editor.value }
+    const data = { 
+      answer: this.state.editor.value,
+      test: exercise.test_code,
+      solution: exercise.test_code_solution
+    }
     const url = process.env.REACT_APP_API_GATEWAY_URL
     
     axios.post(url, data)
@@ -55,8 +58,8 @@ class Exercises extends Component {
         console.log(res) 
         newState.showGrading = false
         newState.button.isDisabled = false
-        if (res.data) { newState.showCorrect = true }
-        if (!res.data) { newState.showIncorrect = true }
+        if (res.data && !res.data.errorType) { newState.showCorrect = true }
+        if (!res.data || res.data.errorType) { newState.showIncorrect = true }
         this.setState(newState)
       })
       .catch((err) => {
@@ -76,63 +79,14 @@ class Exercises extends Component {
             <span>Please log in to submit an exercise.</span>
           </div>
         }
-        {this.state.exercises.length &&
-          <div key={this.state.exercises[0].id}>
-            <h5 className="title is-5">{this.state.exercises[0].body}</h5>
-            <AceEditor 
-              mode="python"
-              theme="solarized_dark"
-              name={(this.state.exercises[0].id).toString()}
-              onLoad={this.onLoad}
-              onChange={this.onChange}
-              fontSize={14}
-              height={'175px'}
-              showPrintMargin={true}
-              showGutter={true}
-              highlightActiveLine={true}
-              value={this.state.editor.value}
-              style={{
-                marginBottom: '10px'
-              }}
-              editorProps={{
-                $blockScrolling: Infinity
-              }}
-            />
-            {this.props.isAuthenticated && 
-              <div>
-                <button 
-                  className="button is-primary" 
-                  onClick={this.submitExercise}
-                  disabled={this.state.editor.button.isDisabled}
-                >Run Code</button>
-                {this.state.editor.showGrading &&
-                  <h5 className="title is-5">
-                    <span className="icon is-large">
-                      <i className="fas fa-spinner fa-pulse"></i>
-                    </span>
-                    <span className="grade-text">Grading...</span>
-                  </h5>
-                }
-                {this.state.editor.showCorrect &&
-                  <h5 className="title is-5">
-                    <span className="icon is-large">
-                      <i className="fas fa-check"></i>
-                    </span>
-                    <span className="grade-text">Correct!</span>
-                  </h5>
-                }
-                {this.state.editor.showIncorrect &&
-                  <h5 className="title is-5">
-                    <span className="icon is-large">
-                      <i className="fas fa-times"></i>
-                    </span>
-                    <span className="grade-text">Incorrect!</span>
-                  </h5>
-                }
-              </div>
-            }
-            <br/><hr/>
-          </div>
+        {this.state.exercises.length > 0 &&
+          <Exercise
+            exercise={this.state.exercises[0]} 
+            editor={this.state.editor}
+            isAuthenticated={this.props.isAuthenticated}
+            onChange={this.onChange}
+            submitExercise={this.submitExercise}
+          />
         }
       </div>
     )

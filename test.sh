@@ -21,6 +21,10 @@ server() {
   inspect $? exercises
   docker-compose -f docker-compose-dev.yml exec exercises flake8 project
   inspect $? exercises-lint
+  docker-compose -f docker-compose-dev.yml exec scores python manage.py test
+  inspect $? scores
+  docker-compose -f docker-compose-dev.yml exec scores flake8 project
+  inspect $? scores-lint
   docker-compose -f docker-compose-dev.yml down
 }
 
@@ -52,6 +56,10 @@ all() {
   inspect $? exercises
   docker-compose -f docker-compose-dev.yml exec exercises flake8 project
   inspect $? exercises-lint
+  docker-compose -f docker-compose-dev.yml exec scores python manage.py test
+  inspect $? scores
+  docker-compose -f docker-compose-dev.yml exec scores flake8 project
+  inspect $? scores-lint
   docker-compose -f docker-compose-dev.yml exec client npm test -- --coverage
   inspect $? client
   e2e

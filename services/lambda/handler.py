@@ -4,7 +4,9 @@ from io import StringIO
 def lambda_handler(event, context):
     # get code from payload
     code = event['answer']
-    test_code = code + '\nprint(sum(1,1))'
+    test = event['test']
+    solution = event['solution']
+    test_code = code + '\nprint(' + test +')'
     #capture stdout
     buffer = StringIO()
     sys.stdout = buffer
@@ -16,6 +18,6 @@ def lambda_handler(event, context):
     # return stdout
     sys.stdout = sys.stdout
     # check
-    if int(buffer.getvalue()) == 2:
+    if buffer.getvalue()[:-1] == solution:
         return True
     return False
