@@ -98,9 +98,9 @@ services:
     volumes:
       - './services/scores:/usr/src/app'
     ports:
-      - 5003:5000
+      - 5000
     environment:
-      - FLASK_ENV=development
+      - FLASK_ENV=production
       - APP_SETTINGS=project.config.StagingConfig
       - SECRET_KEY=my_precious
       - DATABASE_URL=postgres://postgres:postgres@scores-db:5432/scores_stage
@@ -117,7 +117,7 @@ services:
       context: ./services/scores/project/db
       dockerfile: Dockerfile
     ports:
-      - 5438:5432
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

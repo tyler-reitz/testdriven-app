@@ -51,7 +51,7 @@
     },
     {
       "name": "scores-db",
-      "image": "%s.dkr.ecr.us-west-1.amazonaws.com/test-driven-exercises_db:staging",
+      "image": "%s.dkr.ecr.us-west-1.amazonaws.com/test-driven-scores-db:staging",
       "essential": true,
       "memoryReservation": 300,
       "portMappings": [
