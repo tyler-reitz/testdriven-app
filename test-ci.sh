@@ -14,16 +14,16 @@ dev() {
   docker-compose -f docker-compose-dev.yml up -d --build
   docker-compose -f docker-compose-dev.yml exec users python manage.py test
   inspect $? users
-  docker-compose -f docker-compose-dev.yml exec users flake8 project
+  #docker-compose -f docker-compose-dev.yml exec users flake8 project
   inspect $? users-lint
   docker-compose -f docker-compose-dev.yml up -d --build
   docker-compose -f docker-compose-dev.yml exec exercises python manage.py test
   inspect $? exercises
-  docker-compose -f docker-compose-dev.yml exec exercises flake8 project
+  #docker-compose -f docker-compose-dev.yml exec exercises flake8 project
   inspect $? exercises-lint
   docker-compose -f docker-compose-dev.yml exec scores python manage.py test
   inspect $? scores
-  docker-compose -f docker-compose-dev.yml exec scores flake8 project
+  #docker-compose -f docker-compose-dev.yml exec scores flake8 project
   inspect $? scores-lint
   docker-compose -f docker-compose-dev.yml exec client npm test -- --coverage
   inspect $? client
