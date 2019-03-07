@@ -48,6 +48,7 @@ services:
         - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
         - REACT_APP_API_GATEWAY_URL=${REACT_APP_API_GATEWAY_URL}
         - REACT_APP_EXERCISES_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
+        - REACT_APP_SCORES_SERVICE_URL=${REACT_APP_SCORES_SERVICE_URL}
     ports:
       - 80
     depends_on:
@@ -105,7 +106,7 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@scores-db:5432/scores_stage
       - DATABASE_TEST_URL=postgres://postgres:postgres@scores-db:5432/scores_test
       - USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
-      - USERS_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
+      - EXERCISES_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
     depends_on:
       - users
       - scores-db

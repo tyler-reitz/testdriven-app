@@ -126,6 +126,7 @@ def update_score(resp, exercise_id):
             response_object['message'] = 'Score was updated!'
             return jsonify(response_object), 200
         else:
+            print(resp['data']['id'], exercise_id, correct)
             db.session.add(Score(
                 user_id=resp['data']['id'],
                 exercise_id=int(exercise_id),
