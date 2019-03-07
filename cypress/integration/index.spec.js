@@ -40,6 +40,7 @@ describe('Index', () => {
       .get('a').contains('Log In').should('not.be.visible')
       .get('a').contains('Swagger')
       .get('a').contains('Users')
+      .get('.navbar-burger').click()
       .get('button').contains('Run Code')
       .get('.notificaiton.is-warning').should('not.be.visible')
       .get('.notificaiton.is-success').should('not.be.visible')

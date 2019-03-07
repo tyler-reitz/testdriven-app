@@ -7,6 +7,9 @@ const password = 'greaterthanten'
 
 describe('Message', () => {
   it('should display flash messages correctly', () => {
+    cy.server()
+    cy.route('POST', 'auth/login').as('loginUser')
+
     cy
       .visit('/register')
       .get('input[name="username"]').type(username)
@@ -36,7 +39,7 @@ describe('Message', () => {
       .get('input[name="email"]').clear().type(email)
       .get('input[name="password"]').clear().type(password)
       .get('input[type="submit"]').click()
-      .wait(100)
+      .wait('@loginUser')
 
     cy
       .get('.notification.is-success').contains('Welcome!')
@@ -50,6 +53,7 @@ describe('Message', () => {
       .get('input[name="email"]').type(email)
       .get('input[name="password"]').type(password)
       .get('input[type="submit"]').click()
+      .wait('@loginUser')
 
     cy
       .get('.notification.is-success').contains('Welcome!')
